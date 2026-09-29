@@ -2,6 +2,9 @@
 
 ご縁と恋愛を読む鑑定師・結灯 凛による、占い/鑑定サービスの販売用ランディングページ（静的サイト）です。
 
+**公開URL: https://yuibi-rin.github.io/yuibi/**
+（GitHubリポジトリ: https://github.com/yuibi-rin/yuibi、GitHub Pagesでホスティング）
+
 ## ブランド設計
 
 | 項目 | 内容 |
@@ -60,14 +63,16 @@ MOSH公開ページ: https://mosh.jp/yuibi-rin/profile
 - 鑑定書サンプルページ：`sample.html`（架空の人物名で鑑定書の一部を抜粋表示。LPのメニューセクションから「鑑定書のサンプルを見る」でリンク）
 - LP最終チェック：全ページ・アセットの配信確認、内部リンク・アンカーの整合性、CTA導線（ヘッダー→LINE）、モバイルメニューのJS動作を確認済み（詳細は本ファイル更新時の会話履歴を参照）
 - Threads固定投稿・販売導線：`threads-posts.md` に固定投稿3本（①結灯凛とは？②無料ミニ鑑定について③有料鑑定について）と、通常投稿からの誘導フレーズ・ハッシュタグ案を用意
+- **LPのホスティング**：GitHub Pagesで公開済み（https://yuibi-rin.github.io/yuibi/）。実サイトファイル（`index.html`/`tokushoho.html`/`sample.html`/`css`/`js`/`images`/`README.md`）のみをリポジトリにpush、内部運用ドキュメント（MOSH用コピー・LINEメッセージ・鑑定書テンプレート・Threads投稿文面）は `.gitignore` で除外しローカルのみ保持
 
 ## 残っている差し替え箇所
 
 - `tokushoho.html` 内の所在地・連絡先（`[準備中：…]`）— MOSHの非公開設定を使うか、正式な情報を確定次第記載
 - MOSHへの実際の登録・商品ページ作成（コピーは `mosh-menu-copy.md` を参照）
 - フッターの「プライバシーポリシー」リンク（現在は `#` のダミーリンク、ページ未作成）
-- **LPのホスティング（未対応）** — 現状ローカルファイルのみで、公開URLがない。Threadsのプロフィールリンクに設定するには、どこかのサーバー/ホスティングサービスにアップロードする必要がある
+- Threadsのプロフィールリンクに公開URL（https://yuibi-rin.github.io/yuibi/）を設定する
 - 実際の購入テスト（Threads→LP→LINE→MOSH→決済→ヒアリング→鑑定書納品を一通り確認）
+- LP更新時は `git add`・`git commit`・`git push origin main` で再デプロイが必要（GitHub Pagesは自動反映）
 
 ## 確認方法
 
