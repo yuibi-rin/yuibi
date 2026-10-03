@@ -4,3 +4,19 @@ line-purchase-message.md
 threads-posts.md
 鑑定書テンプレート.docx
 鑑定書テンプレート_preview.pdf
+
+# 社内運用フォルダ（AIマーケ会社の資料・設定。公開リポジトリには含めない）
+01_*/
+02_*/
+03_*/
+04_*/
+05_*/
+06_*/
+99_*/
+占いスピ_設定/
+占いスピ_制作物/
+.claude/
+.codex/
+.agents/
+CLAUDE.md
+AGENTS.md
