@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>恋の迷い方タイプ診断 — 結灯（ゆいび）</title>
+<meta name="description" content="8つの質問で、あなたが恋に迷ったときの「くせ」が分かります。所要1分・登録不要。">
+<meta property="og:title" content="恋の迷い方タイプ診断 — 結灯（ゆいび）">
+<meta property="og:description" content="8つの質問で、恋に迷ったときのあなたの「くせ」が分かります。所要1分・登録不要。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0d;
+  --bg-alt: #10142a;
+  --surface: #161b36;
+  --text: #f2ead9;
+  --muted: #bcb9c9;
+  --accent: #c6a15b;
+  --accent-soft: #e3cd94;
+  --border: rgba(198, 161, 91, 0.25);
+  --serif: "Noto Serif JP", serif;
+  --sans: "Zen Kaku Gothic New", sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at top, var(--bg-alt) 0%, var(--bg) 70%);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+.wrap { max-width: 560px; margin: 0 auto; padding: 0 16px; }
+header { padding: 20px 0 8px; text-align: center; }
+.logo { font-family: var(--serif); font-weight: 700; color: var(--accent-soft); letter-spacing: .05em; text-decoration: none; }
+.logo small { font-size: .7em; margin-left: 6px; color: var(--muted); font-weight: 400; }
+.card {
+  background: rgba(22, 27, 54, 0.85);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 20px;
+  margin: 16px 0 32px;
+}
+h1, h2 { font-family: var(--serif); font-weight: 600; line-height: 1.5; margin: 0 0 12px; }
+h1 { font-size: 1.5rem; text-align: center; }
+h2 { font-size: 1.15rem; }
+.lead { color: var(--muted); text-align: center; margin: 0 0 24px; }
+.note { font-size: .78rem; color: var(--muted); margin-top: 20px; }
+.btn {
+  display: block; width: 100%;
+  padding: 14px 16px; border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+  color: #1a1408; font-weight: 700; font-size: 1rem; font-family: var(--sans);
+  text-align: center; text-decoration: none; cursor: pointer;
+}
+.btn-line { background: #06c755; border-color: #06c755; color: #fff; }
+.btn-ghost { background: transparent; color: var(--accent-soft); margin-top: 12px; }
+.progress { height: 4px; background: rgba(255,255,255,.08); border-radius: 4px; margin-bottom: 20px; overflow: hidden; }
+.progress span { display: block; height: 100%; background: var(--accent-soft); width: 0; transition: width .3s; }
+.qnum { color: var(--accent-soft); font-size: .85rem; margin-bottom: 4px; }
+.opts { display: grid; gap: 10px; margin-top: 16px; }
+.opt {
+  text-align: left; padding: 14px 16px; border-radius: 12px;
+  border: 1px solid var(--border); background: rgba(10,10,13,.5);
+  color: var(--text); font-family: var(--sans); font-size: .95rem; line-height: 1.6; cursor: pointer;
+}
+.opt:hover, .opt:focus-visible { border-color: var(--accent-soft); outline: none; }
+.type-label { text-align: center; color: var(--muted); font-size: .85rem; margin: 0; }
+.type-name { text-align: center; font-family: var(--serif); font-size: 1.8rem; color: var(--accent-soft); margin: 4px 0 8px; }
+.type-catch { text-align: center; margin: 0 0 20px; }
+.step { border-left: 3px solid var(--accent); padding: 8px 12px; margin: 20px 0; background: rgba(198,161,91,.08); border-radius: 0 8px 8px 0; }
+.step strong { display: block; color: var(--accent-soft); font-size: .85rem; }
+.next { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+.kw { text-align: center; font-size: 1.1rem; margin: 12px 0; }
+.kw b { color: var(--accent-soft); font-size: 1.3rem; }
+.hidden { display: none; }
+footer { text-align: center; font-size: .75rem; color: var(--muted); padding: 0 0 32px; }
+footer a { margin: 0 8px; }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <a class="logo" href="index.html">結灯<small>ゆいび</small></a>
+</header>
+
+<main class="wrap">
+  <section class="card" id="start">
+    <h1>恋の迷い方タイプ診断</h1>
+    <p class="lead">8つの質問で、あなたが恋に迷ったときの<br>「くせ」が分かります。<br>所要1分・登録不要</p>
+    <button class="btn" id="startBtn">診断をはじめる</button>
+    <p class="note">この診断は、恋の向き合い方のくせを知るためのものです。相手の気持ちや未来を言い当てるものではありません。</p>
+  </section>
+
+  <section class="card hidden" id="quiz" aria-live="polite">
+    <div class="progress"><span id="bar"></span></div>
+    <p class="qnum" id="qnum"></p>
+    <h2 id="qtext"></h2>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  <section class="card hidden" id="result" aria-live="polite">
+    <p class="type-label">あなたは</p>
+    <p class="type-name" id="rname"></p>
+    <p class="type-catch" id="rcatch"></p>
+    <div id="rbody"></div>
+    <div class="step"><strong>今日の小さな一歩</strong><span id="rstep"></span></div>
+    <div class="next">
+      <p>このタイプは、あなたの「くせ」の入り口です。<br>
+      どこで迷っていて、次にどう動けばいいかは、生年月日と今の状況によって変わります。</p>
+      <p>結灯 凛が、数秘とほんの少しの霊感で、あなたの<b>「次の一歩鑑定」（無料）</b>をお届けします。</p>
+      <p class="kw">LINEで <b id="rkw"></b> と送ってください🌙</p>
+      <a class="btn btn-line" href="https://lin.ee/8KUu7Op" target="_blank" rel="noopener">LINEで「次の一歩鑑定」を受け取る</a>
+      <button class="btn btn-ghost" id="copyBtn">タイプ名をコピーする</button>
+      <button class="btn btn-ghost" id="retryBtn">もう一度診断する</button>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <a href="index.html">結灯トップ</a><a href="tokushoho.html">特定商取引法に基づく表記</a><a href="privacy.html">プライバシーポリシー</a>
+  <p>&copy; 2026 結灯（ゆいび）</p>
+</footer>
+
+<script>
+const Q = [
+  ["好きな人から、返事が半日来ません。あなたは？",
+   ["自分からは送らず、通知が来るのをじっと待つ","送った文を読み返して、何が悪かったか考える","「忙しい？」ともう一通送りたくなる","相手が疲れているのかも、と心配になる"]],
+  ["夜、ひとりの時間に一番しがちなことは？",
+   ["相手のSNSが更新されていないか見に行く","今までのやりとりを最初から読み返す","「この関係、どうなるんだろう」と答えを出したくなる","相手が喜ぶことを考えている"]],
+  ["友だちに恋の相談をするとき、あなたは？",
+   ["話したいけれど、結局「大丈夫」と言ってしまう","状況を細かく説明して、意見を何人にも聞く","「で、どうしたらいい？」とすぐ答えを求める","相手を悪く言われると、かばってしまう"]],
+  ["デートの予定、どうやって決まることが多い？",
+   ["相手から誘われるのを待つ","誘う文を何度も書き直して、なかなか送れない","思い立ったらすぐ誘う","相手の都合に全部合わせる"]],
+  ["恋で一番こわいことは？",
+   ["自分から動いて、拒まれること","判断を間違えて、後悔すること","このまま何も変わらないこと","相手に嫌われて、離れていかれること"]],
+  ["占いを見るとしたら、知りたいのは？",
+   ["相手が私をどう思っているか","この恋の流れと、うまくいく理由","いつ動けばいいか、結果はどうなるか","相手にとって、私は必要な存在か"]],
+  ["小さなけんかのあと、あなたは？",
+   ["相手から連絡が来るまで待つ","どちらが悪かったか、頭の中で整理し続ける","すぐに話し合って、白黒つけたい","自分が悪くなくても、先に謝る"]],
+  ["今のあなたに一番近い言葉は？",
+   ["「本当は、もっと近づきたい」","「考えすぎて、疲れてしまった」","「早く、答えがほしい」","「私ばかり、頑張っている気がする」"]]
+];
+const T = [
+  {name:"待ちすぎさん", kw:"待ちすぎ", catch:"やさしさから、一歩を相手にゆだねている人",
+   body:["あなたは、相手のペースを大切にできる人です。","その分、自分の「会いたい」「話したい」を後回しにしてきたのかもしれません。","待つ時間が長いほど、気持ちは心の中でふくらんでいきます。"],
+   step:"送るかどうかは別にして、相手に言いたい一言をメモに書いてみてください。"},
+  {name:"考えすぎさん", kw:"考えすぎ", catch:"まじめさから、正解を探し続けている人",
+   body:["あなたは、相手のことも自分のことも、大切に考えられる人です。","ただ、考えるほど「正解」は遠くなり、気持ちが置き去りになることがあります。","恋には、答えより先に「どうしたいか」があります。"],
+   step:"「私はどうしたい？」を、理由をつけずに一行だけ書いてみてください。"},
+  {name:"急ぎすぎさん", kw:"急ぎすぎ", catch:"まっすぐさから、答えを早く出したい人",
+   body:["あなたは、気持ちに正直に動ける人です。","その分、待つ時間や分からない時間が、人より苦しく感じるのかもしれません。","急ぎたくなるのは、それだけ本気だからです。"],
+   step:"動く前に、ひと晩だけ眠ってから決めてみてください。"},
+  {name:"抱えすぎさん", kw:"抱えすぎ", catch:"思いやりから、相手の分まで背負っている人",
+   body:["あなたは、相手の気持ちに寄りそえる人です。","でも気づけば、自分の気持ちより相手の都合を先に考えていませんか。","あなたの気持ちも、同じくらい大切にされていいんです。"],
+   step:"今週ひとつだけ、自分のための予定を先に決めてみてください。"}
+];
+const $ = id => document.getElementById(id);
+let i = 0, score = [0,0,0,0], last = 0;
+
+function show(id){ ["start","quiz","result"].forEach(s => $(s).classList.toggle("hidden", s !== id)); window.scrollTo(0,0); }
+
+function render(){
+  const [q, opts] = Q[i];
+  $("qnum").textContent = "質問 " + (i+1) + " / " + Q.length;
+  $("qtext").textContent = q;
+  $("bar").style.width = (i / Q.length * 100) + "%";
+  const box = $("opts"); box.innerHTML = "";
+  opts.forEach((o, k) => {
+    const b = document.createElement("button");
+    b.className = "opt"; b.textContent = o;
+    b.onclick = () => answer(k);
+    box.appendChild(b);
+  });
+}
+
+function answer(k){
+  score[k]++;
+  if (i === Q.length - 1) last = k;
+  i++;
+  if (i < Q.length) render(); else result();
+}
+
+function result(){
+  const max = Math.max(...score);
+  const top = score.map((s,k) => s === max ? k : -1).filter(k => k >= 0);
+  const t = T[top.includes(last) ? last : top[0]];
+  $("rname").textContent = t.name;
+  $("rcatch").textContent = t.catch;
+  $("rbody").innerHTML = t.body.map(p => "<p>" + p + "</p>").join("");
+  $("rstep").textContent = t.step;
+  $("rkw").textContent = "「" + t.kw + "」";
+  $("copyBtn").dataset.kw = t.kw;
+  $("copyBtn").textContent = "タイプ名をコピーする";
+  show("result");
+}
+
+$("startBtn").onclick = () => { i = 0; score = [0,0,0,0]; render(); show("quiz"); };
+$("retryBtn").onclick = () => show("start");
+$("copyBtn").onclick = async e => {
+  const kw = e.target.dataset.kw;
+  try { await navigator.clipboard.writeText(kw); e.target.textContent = "コピーしました：" + kw; }
+  catch { e.target.textContent = "「" + kw + "」と入力してください"; }
+};
+</script>
+</body>
+</html>
