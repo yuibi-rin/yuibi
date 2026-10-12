@@ -81,6 +81,7 @@ h2 { font-size: 1.15rem; }
 footer { text-align: center; font-size: .75rem; color: var(--muted); padding: 0 0 32px; }
 footer a { margin: 0 8px; }
 </style>
+  <script data-goatcounter="https://yuibirin.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
 <header class="wrap">
@@ -113,7 +114,7 @@ footer a { margin: 0 8px; }
       どこで迷っていて、次にどう動けばいいかは、生年月日と今の状況によって変わります。</p>
       <p>結灯 凛が、数秘とほんの少しの霊感で、あなたの<b>「次の一歩鑑定」（無料）</b>をお届けします。</p>
       <p class="kw">LINEで <b id="rkw"></b> と送ってください🌙</p>
-      <a class="btn btn-line" href="https://lin.ee/8KUu7Op" target="_blank" rel="noopener">LINEで「次の一歩鑑定」を受け取る</a>
+      <a class="btn btn-line" href="https://lin.ee/8KUu7Op" target="_blank" rel="noopener" data-goatcounter-click="shindan-line" data-goatcounter-title="診断→LINEボタン">LINEで「次の一歩鑑定」を受け取る</a>
       <button class="btn btn-ghost" id="copyBtn">タイプ名をコピーする</button>
       <button class="btn btn-ghost" id="retryBtn">もう一度診断する</button>
     </div>
@@ -195,10 +196,12 @@ function result(){
   $("rkw").textContent = "「" + t.kw + "」";
   $("copyBtn").dataset.kw = t.kw;
   $("copyBtn").textContent = "タイプ名をコピーする";
+  gc("shindan-done-" + t.kw, "診断完了：" + t.name);
   show("result");
 }
 
-$("startBtn").onclick = () => { i = 0; score = [0,0,0,0]; render(); show("quiz"); };
+function gc(path, title){ try { window.goatcounter && window.goatcounter.count && window.goatcounter.count({path: path, title: title, event: true}); } catch(e){} }
+$("startBtn").onclick = () => { i = 0; score = [0,0,0,0]; gc("shindan-start", "診断スタート"); render(); show("quiz"); };
 $("retryBtn").onclick = () => show("start");
 $("copyBtn").onclick = async e => {
   const kw = e.target.dataset.kw;
