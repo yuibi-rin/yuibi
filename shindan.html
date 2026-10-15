@@ -75,8 +75,10 @@ h2 { font-size: 1.15rem; }
 .step { border-left: 3px solid var(--accent); padding: 8px 12px; margin: 20px 0; background: rgba(198,161,91,.08); border-radius: 0 8px 8px 0; }
 .step strong { display: block; color: var(--accent-soft); font-size: .85rem; }
 .next { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
-.kw { text-align: center; font-size: 1.1rem; margin: 12px 0; }
-.kw b { color: var(--accent-soft); font-size: 1.3rem; }
+.steps-title { font-weight: 700; margin: 0 0 4px; }
+.steps { margin: 0 0 20px; padding-left: 1.4em; }
+.steps li { margin: 4px 0; }
+.steps b { color: var(--accent-soft); }
 .hidden { display: none; }
 footer { text-align: center; font-size: .75rem; color: var(--muted); padding: 0 0 32px; }
 footer a { margin: 0 8px; }
@@ -107,11 +109,16 @@ footer a { margin: 0 8px; }
     <p class="type-label">あなたは</p>
     <p class="type-name" id="rname"></p>
     <p class="type-catch" id="rcatch"></p>
+    <div class="step"><strong><span id="rname2"></span>が迷いやすいのは、こんな時です</strong><span id="rscene"></span></div>
+    <p>その夜にできる<b>「小さな一歩」</b>を、LINEでお渡ししています🌙</p>
     <div class="next">
-      <p>このタイプの<b>続き</b>（迷いやすい場面と、今日からできる小さな一歩）は、LINEでお届けしています。</p>
-      <p class="kw">LINEで <b id="rkw"></b> と送ってください🌙</p>
-      <p>送ってくださった方には、結灯 凛が数秘とほんの少しの霊感で視る<b>「次の一歩鑑定」（無料）</b>もお届けします。</p>
-      <a class="btn btn-line" href="https://lin.ee/8KUu7Op" target="_blank" rel="noopener" data-goatcounter-click="shindan-line" data-goatcounter-title="診断→LINEボタン">LINEで続きを受け取る（無料）</a>
+      <p class="steps-title">LINEで続きを受け取るには</p>
+      <ol class="steps">
+        <li>下のボタンから友だち追加（無料）</li>
+        <li>トーク画面で <b id="rkw"></b> と送る</li>
+        <li>続きと、結灯 凛が数秘とほんの少しの霊感で視る<b>「次の一歩鑑定」（無料）</b>のご案内が届きます</li>
+      </ol>
+      <a class="btn btn-line" id="lineBtn" href="https://lin.ee/8KUu7Op" target="_blank" rel="noopener" data-goatcounter-click="shindan-line" data-goatcounter-title="診断→LINEボタン">LINEで続きを受け取る（無料）</a>
       <button class="btn btn-ghost" id="copyBtn">タイプ名をコピーする</button>
       <button class="btn btn-ghost" id="retryBtn">もう一度診断する</button>
     </div>
@@ -143,10 +150,10 @@ const Q = [
    ["「本当は、もっと近づきたい」","「考えすぎて、疲れてしまった」","「早く、答えがほしい」","「私ばかり、頑張っている気がする」"]]
 ];
 const T = [
-  {name:"待ちすぎさん", kw:"待ちすぎ", catch:"やさしさから、一歩を相手にゆだねている人"},
-  {name:"考えすぎさん", kw:"考えすぎ", catch:"まじめさから、正解を探し続けている人"},
-  {name:"急ぎすぎさん", kw:"急ぎすぎ", catch:"まっすぐさから、答えを早く出したい人"},
-  {name:"抱えすぎさん", kw:"抱えすぎ", catch:"思いやりから、相手の分まで背負っている人"}
+  {name:"待ちすぎさん", kw:"待ちすぎ", catch:"やさしさから、一歩を相手にゆだねている人", scene:"返事を待つ夜、自分から送るかどうかで止まってしまう時"},
+  {name:"考えすぎさん", kw:"考えすぎ", catch:"まじめさから、正解を探し続けている人", scene:"やりとりを何度も読み返して、相手の気持ちの「正解」を探してしまう時"},
+  {name:"急ぎすぎさん", kw:"急ぎすぎ", catch:"まっすぐさから、答えを早く出したい人", scene:"返事が来ない時間に耐えられず、もう一通送りたくなる時"},
+  {name:"抱えすぎさん", kw:"抱えすぎ", catch:"思いやりから、相手の分まで背負っている人", scene:"自分が悪くなくても先に謝って、本音を飲みこんでしまう時"}
 ];
 const $ = id => document.getElementById(id);
 let i = 0, score = [0,0,0,0], last = 0;
@@ -180,7 +187,10 @@ function result(){
   const t = T[top.includes(last) ? last : top[0]];
   $("rname").textContent = t.name;
   $("rcatch").textContent = t.catch;
+  $("rname2").textContent = t.name;
+  $("rscene").textContent = "「" + t.scene + "」";
   $("rkw").textContent = "「" + t.kw + "」";
+  $("lineBtn").textContent = "LINEで「" + t.kw + "」の続きを受け取る（無料）";
   $("copyBtn").dataset.kw = t.kw;
   $("copyBtn").textContent = "タイプ名をコピーする";
   gc("shindan-done-" + t.kw, "診断完了：" + t.name);
