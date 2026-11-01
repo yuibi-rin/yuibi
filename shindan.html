@@ -74,9 +74,13 @@ h2 { font-size: 1.15rem; }
 .type-catch { text-align: center; margin: 0 0 20px; }
 .step { border-left: 3px solid var(--accent); padding: 8px 12px; margin: 20px 0; background: rgba(198,161,91,.08); border-radius: 0 8px 8px 0; }
 .step strong { display: block; color: var(--accent-soft); font-size: .85rem; }
-.next { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
-.steps-title { font-weight: 700; margin: 0 0 4px; }
-.steps { margin: 0 0 20px; padding-left: 1.4em; }
+.next { margin-top: 24px; padding-top: 8px; border-top: 1px solid var(--border); }
+.cta { margin: 0 0 8px; padding: 16px; border: 1px solid #06c755; border-radius: 12px; background: rgba(6,199,85,.06); }
+.cta-title { font-family: var(--serif); font-weight: 700; text-align: center; color: var(--accent-soft); margin: 0 0 6px; }
+.cta-sub { font-size: .88rem; margin: 0 0 14px; }
+.cta-sub b { color: var(--accent-soft); }
+.steps { margin: 14px 0 0; padding-left: 1.4em; font-size: .9rem; }
+.steps small { color: var(--muted); }
 .steps li { margin: 4px 0; }
 .steps b { color: var(--accent-soft); }
 .hidden { display: none; }
@@ -109,17 +113,18 @@ footer a { margin: 0 8px; }
     <p class="type-label">あなたは</p>
     <p class="type-name" id="rname"></p>
     <p class="type-catch" id="rcatch"></p>
-    <div class="step"><strong><span id="rname2"></span>が迷いやすいのは、こんな時です</strong><span id="rscene"></span></div>
-    <p>その夜にできる<b>「小さな一歩」</b>を、LINEでお渡ししています🌙</p>
-    <div class="next">
-      <p class="steps-title">LINEで続きを受け取るには</p>
-      <ol class="steps">
-        <li>下のボタンから友だち追加（無料）</li>
-        <li>トーク画面で <b id="rkw"></b> と送る</li>
-        <li>続きと、結灯 凛が数秘とほんの少しの霊感で視る<b>「次の一歩鑑定」（無料）</b>のご案内が届きます</li>
-      </ol>
+    <div class="cta">
+      <p class="cta-title">無料で、結灯 凛があなたの次の一歩を視ます🌙</p>
+      <p class="cta-sub">このタイプの続き（その夜にできる小さな一歩）と、数秘とほんの少しの霊感で視る<b>「次の一歩鑑定」</b>を、LINEでお届けします。</p>
       <a class="btn btn-line" id="lineBtn" href="https://lin.ee/8KUu7Op" target="_blank" rel="noopener" data-goatcounter-click="shindan-line" data-goatcounter-title="診断→LINEボタン">LINEで続きを受け取る（無料）</a>
-      <button class="btn btn-ghost" id="copyBtn">タイプ名をコピーする</button>
+      <ol class="steps">
+        <li>上のボタンから友だち追加（無料）</li>
+        <li>トーク画面に <b id="rkw"></b> と貼って送る<br><small>ボタンを押すと、タイプ名は自動でコピーされます</small></li>
+      </ol>
+    </div>
+    <div class="step"><strong><span id="rname2"></span>が迷いやすいのは、こんな時です</strong><span id="rscene"></span></div>
+    <div class="next">
+      <button class="btn btn-ghost" id="copyBtn" data-goatcounter-click="shindan-copy" data-goatcounter-title="診断→タイプ名コピー">タイプ名をコピーする</button>
       <button class="btn btn-ghost" id="retryBtn">もう一度診断する</button>
     </div>
   </section>
@@ -200,6 +205,10 @@ function result(){
 function gc(path, title){ try { window.goatcounter && window.goatcounter.count && window.goatcounter.count({path: path, title: title, event: true}); } catch(e){} }
 $("startBtn").onclick = () => { i = 0; score = [0,0,0,0]; gc("shindan-start", "診断スタート"); render(); show("quiz"); };
 $("retryBtn").onclick = () => show("start");
+$("lineBtn").addEventListener("click", () => {
+  const kw = $("copyBtn").dataset.kw;
+  try { navigator.clipboard.writeText(kw).catch(() => {}); } catch(e) {}
+});
 $("copyBtn").onclick = async e => {
   const kw = e.target.dataset.kw;
   try { await navigator.clipboard.writeText(kw); e.target.textContent = "コピーしました：" + kw; }
